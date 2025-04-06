@@ -5,19 +5,15 @@ public class TicketDAO {
 
     // CREATE
     public static boolean insertTicket(Ticket t) {
-        String sql = "INSERT INTO Ticket (bookingId, seatId, price, discountId, purchaseDatetime) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Ticket (price, filmId) VALUES (?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, t.getBookingId());
-            stmt.setInt(2, t.getSeatId());
-            stmt.setDouble(3, t.getPrice());
-            stmt.setInt(4, t.getDiscountId());
-            stmt.setTimestamp(5, t.getPurchaseDatetime());
+            stmt.setDouble(1, t.getPrice());
+            stmt.setInt(2, t.getFilmId());
 
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,12 +32,9 @@ public class TicketDAO {
 
             while (rs.next()) {
                 Ticket t = new Ticket(
-                        rs.getInt("ticketId"),
-                        rs.getInt("bookingId"),
-                        rs.getInt("seatId"),
+                        rs.getInt("ticketID"),
                         rs.getDouble("price"),
-                        rs.getInt("discountId"),
-                        rs.getTimestamp("purchaseDatetime")
+                        rs.getInt("filmID")
                 );
                 tickets.add(t);
             }
@@ -54,23 +47,20 @@ public class TicketDAO {
     }
 
     // READ ONE
-    public static Ticket getTicketById(int id) {
-        String sql = "SELECT * FROM Ticket WHERE ticketId = ?";
+    public static Ticket getTicketById(int ticketId) {
+        String sql = "SELECT * FROM Ticket WHERE ticketID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, ticketId);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return new Ticket(
-                        rs.getInt("ticketId"),
-                        rs.getInt("bookingId"),
-                        rs.getInt("seatId"),
+                        rs.getInt("ticketID"),
                         rs.getDouble("price"),
-                        rs.getInt("discountId"),
-                        rs.getTimestamp("purchaseDatetime")
+                        rs.getInt("filmID")
                 );
             }
 
@@ -83,20 +73,16 @@ public class TicketDAO {
 
     // UPDATE
     public static boolean updateTicket(Ticket t) {
-        String sql = "UPDATE Ticket SET bookingId = ?, seatId = ?, price = ?, discountId = ?, purchaseDatetime = ? WHERE ticketId = ?";
+        String sql = "UPDATE Ticket SET price = ?, filmID = ? WHERE ticketID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, t.getBookingId());
-            stmt.setInt(2, t.getSeatId());
-            stmt.setDouble(3, t.getPrice());
-            stmt.setInt(4, t.getDiscountId());
-            stmt.setTimestamp(5, t.getPurchaseDatetime());
-            stmt.setInt(6, t.getTicketId());
+            stmt.setDouble(1, t.getPrice());
+            stmt.setInt(2, t.getFilmId());
+            stmt.setInt(3, t.getTicketId());
 
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,15 +91,14 @@ public class TicketDAO {
     }
 
     // DELETE
-    public static boolean deleteTicket(int id) {
-        String sql = "DELETE FROM Ticket WHERE ticketId = ?";
+    public static boolean deleteTicket(int ticketId) {
+        String sql = "DELETE FROM Ticket WHERE ticketID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, id);
+            stmt.setInt(1, ticketId);
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

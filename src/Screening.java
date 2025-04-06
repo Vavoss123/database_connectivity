@@ -1,42 +1,48 @@
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
 
 public class Screening {
     private int screeningId;
-    private Date screeningDate;
+    private Date date;
+    private int screenNumber;
+    private String venue;
+    private int orderId;
     private Time startTime;
-    private int filmId;
-    private double price;
-    private int venueId;
+    private BigDecimal price;
 
     // Constructors
     public Screening() {}
 
-    public Screening(int screeningId, Date screeningDate, Time startTime, int filmId, double price, int venueId) {
+    public Screening(int screeningId, Date date, int screenNumber, String venue, int orderId, Time startTime, BigDecimal price) {
         this.screeningId = screeningId;
-        this.screeningDate = screeningDate;
+        this.date = date;
+        this.screenNumber = screenNumber;
+        this.venue = venue;
+        this.orderId = orderId;
         this.startTime = startTime;
-        this.filmId = filmId;
         this.price = price;
-        this.venueId = venueId;
     }
 
     // Getters and Setters
     public int getScreeningId() { return screeningId; }
     public void setScreeningId(int screeningId) { this.screeningId = screeningId; }
 
-    public Date getScreeningDate() { return screeningDate; }
-    public void setScreeningDate(Date screeningDate) { this.screeningDate = screeningDate; }
+    public Date getDate() { return date; }
+    public void setDate(Date date) { this.date = date; }
+
+    public int getScreenNumber() { return screenNumber; }
+    public void setScreenNumber(int screenNumber) { this.screenNumber = screenNumber; }
+
+    public String getVenue() { return venue; }
+    public void setVenue(String venue) { this.venue = venue; }
+
+    public int getOrderId() { return orderId; }
+    public void setOrderId(int orderId) { this.orderId = orderId; }
 
     public Time getStartTime() { return startTime; }
     public void setStartTime(Time startTime) { this.startTime = startTime; }
 
-    public int getFilmId() { return filmId; }
-    public void setFilmId(int filmId) { this.filmId = filmId; }
-
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
-
-    public int getVenueId() { return venueId; }
-    public void setVenueId(int venueId) { this.venueId = venueId; }
+    public BigDecimal getPrice() { return price; }
+    public void setPrice(BigDecimal price) { this.price = price; }
 }

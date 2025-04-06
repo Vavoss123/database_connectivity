@@ -2,9 +2,11 @@ import java.sql.Timestamp;
 
 public class Film {
     private int filmId;
-    private int runtime;
+    private int duration;
+    private String title;
+    private String genre;
+    private String director;
     private String distributor;
-    private double cost;
     private int releaseYear;
     private String certificate;
     private Timestamp availableStart;
@@ -13,11 +15,14 @@ public class Film {
     // Constructors
     public Film() {}
 
-    public Film(int filmId, int runtime, String distributor, double cost, int releaseYear, String certificate, Timestamp availableStart, Timestamp availableEnd) {
+    public Film(int filmId, int duration, String title, String genre, String director, String distributor,
+                int releaseYear, String certificate, Timestamp availableStart, Timestamp availableEnd) {
         this.filmId = filmId;
-        this.runtime = runtime;
+        this.duration = duration;
+        this.title = title;
+        this.genre = genre;
+        this.director = director;
         this.distributor = distributor;
-        this.cost = cost;
         this.releaseYear = releaseYear;
         this.certificate = certificate;
         this.availableStart = availableStart;
@@ -28,14 +33,20 @@ public class Film {
     public int getFilmId() { return filmId; }
     public void setFilmId(int filmId) { this.filmId = filmId; }
 
-    public int getRuntime() { return runtime; }
-    public void setRuntime(int runtime) { this.runtime = runtime; }
+    public int getDuration() { return duration; }
+    public void setDuration(int duration) { this.duration = duration; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
+
+    public String getDirector() { return director; }
+    public void setDirector(String director) { this.director = director; }
 
     public String getDistributor() { return distributor; }
     public void setDistributor(String distributor) { this.distributor = distributor; }
-
-    public double getCost() { return cost; }
-    public void setCost(double cost) { this.cost = cost; }
 
     public int getReleaseYear() { return releaseYear; }
     public void setReleaseYear(int releaseYear) { this.releaseYear = releaseYear; }

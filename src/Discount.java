@@ -1,36 +1,59 @@
-import java.sql.Date;
-
 public class Discount {
     private int discountId;
-    private String discountName;
-    private double discountRate;
-    private Date validFrom;
-    private Date validTo;
+    private String discountType;
+    private double discountValue;
+    private int groupSaleId;
+    private int folId;
 
     // Constructors
     public Discount() {}
 
-    public Discount(int discountId, String discountName, double discountRate, Date validFrom, Date validTo) {
+    public Discount(int discountId, String discountType, double discountValue, int groupSaleId, int folId) {
         this.discountId = discountId;
-        this.discountName = discountName;
-        this.discountRate = discountRate;
-        this.validFrom = validFrom;
-        this.validTo = validTo;
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.groupSaleId = groupSaleId;
+        this.folId = folId;
     }
 
     // Getters and Setters
-    public int getDiscountId() { return discountId; }
-    public void setDiscountId(int discountId) { this.discountId = discountId; }
+    public int getDiscountId() {
+        return discountId;
+    }
 
-    public String getDiscountName() { return discountName; }
-    public void setDiscountName(String discountName) { this.discountName = discountName; }
+    public void setDiscountId(int discountId) {
+        this.discountId = discountId;
+    }
 
-    public double getDiscountRate() { return discountRate; }
-    public void setDiscountRate(double discountRate) { this.discountRate = discountRate; }
+    public String getDiscountType() {
+        return discountType;
+    }
 
-    public Date getValidFrom() { return validFrom; }
-    public void setValidFrom(Date validFrom) { this.validFrom = validFrom; }
+    public void setDiscountType(String discountType) {
+        this.discountType = discountType;
+    }
 
-    public Date getValidTo() { return validTo; }
-    public void setValidTo(Date validTo) { this.validTo = validTo; }
+    public double getDiscountValue() {
+        return discountValue;
+    }
+
+    public void setDiscountValue(double discountValue) {
+        this.discountValue = discountValue;
+    }
+
+    public int getGroupSaleId() {
+        return groupSaleId;
+    }
+
+    public void setGroupSaleId(int groupSaleId) {
+        this.groupSaleId = groupSaleId;
+    }
+
+    public int getFolId() {
+        return folId;
+    }
+
+    public void setFolId(int folId) {
+        this.folId = folId;
+    }
 }

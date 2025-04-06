@@ -5,21 +5,20 @@ public class ClientsDAO {
 
     // CREATE
     public static boolean insertClient(Clients c) {
-        String sql = "INSERT INTO Client (companyId, companyName, contactName, contactEmail, phoneNumber, " +
-                "streetAddress, city, postcode, billingName, billingEmailAddress) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Client (clientID, companyName, contactName, contactEmail, contactNumber, " +
+                "streetAddress, city, postCode, billingName, billingEmail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, c.getCompanyId());
+            stmt.setString(1, c.getClientId());
             stmt.setString(2, c.getCompanyName());
             stmt.setString(3, c.getContactName());
             stmt.setString(4, c.getContactEmail());
-            stmt.setString(5, c.getPhoneNumber());
+            stmt.setString(5, c.getContactNumber());
             stmt.setString(6, c.getStreetAddress());
             stmt.setString(7, c.getCity());
-            stmt.setString(8, c.getPostcode());
+            stmt.setString(8, c.getPostCode());
             stmt.setString(9, c.getBillingName());
             stmt.setString(10, c.getBillingEmail());
 
@@ -43,16 +42,16 @@ public class ClientsDAO {
 
             while (rs.next()) {
                 Clients c = new Clients(
-                        rs.getString("companyId"),
+                        rs.getString("clientID"),
                         rs.getString("companyName"),
                         rs.getString("contactName"),
                         rs.getString("contactEmail"),
-                        rs.getString("phoneNumber"),
+                        rs.getString("contactNumber"),
                         rs.getString("streetAddress"),
                         rs.getString("city"),
-                        rs.getString("postcode"),
+                        rs.getString("postCode"),
                         rs.getString("billingName"),
-                        rs.getString("billingEmailAddress")
+                        rs.getString("billingEmail")
                 );
                 clients.add(c);
             }
@@ -65,27 +64,27 @@ public class ClientsDAO {
     }
 
     // READ ONE
-    public static Clients getClientById(String companyId) {
-        String sql = "SELECT * FROM Client WHERE companyId = ?";
+    public static Clients getClientById(String clientId) {
+        String sql = "SELECT * FROM Client WHERE clientID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, companyId);
+            stmt.setString(1, clientId);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return new Clients(
-                        rs.getString("companyId"),
+                        rs.getString("clientID"),
                         rs.getString("companyName"),
                         rs.getString("contactName"),
                         rs.getString("contactEmail"),
-                        rs.getString("phoneNumber"),
+                        rs.getString("contactNumber"),
                         rs.getString("streetAddress"),
                         rs.getString("city"),
-                        rs.getString("postcode"),
+                        rs.getString("postCode"),
                         rs.getString("billingName"),
-                        rs.getString("billingEmailAddress")
+                        rs.getString("billingEmail")
                 );
             }
 
@@ -98,9 +97,8 @@ public class ClientsDAO {
 
     // UPDATE
     public static boolean updateClient(Clients c) {
-        String sql = "UPDATE Client SET companyName = ?, contactName = ?, contactEmail = ?, phoneNumber = ?, " +
-                "streetAddress = ?, city = ?, postcode = ?, billingName = ?, billingEmailAddress = ? " +
-                "WHERE companyId = ?";
+        String sql = "UPDATE Client SET companyName = ?, contactName = ?, contactEmail = ?, contactNumber = ?, " +
+                "streetAddress = ?, city = ?, postCode = ?, billingName = ?, billingEmail = ? WHERE clientID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -108,13 +106,13 @@ public class ClientsDAO {
             stmt.setString(1, c.getCompanyName());
             stmt.setString(2, c.getContactName());
             stmt.setString(3, c.getContactEmail());
-            stmt.setString(4, c.getPhoneNumber());
+            stmt.setString(4, c.getContactNumber());
             stmt.setString(5, c.getStreetAddress());
             stmt.setString(6, c.getCity());
-            stmt.setString(7, c.getPostcode());
+            stmt.setString(7, c.getPostCode());
             stmt.setString(8, c.getBillingName());
             stmt.setString(9, c.getBillingEmail());
-            stmt.setString(10, c.getCompanyId());
+            stmt.setString(10, c.getClientId());
 
             return stmt.executeUpdate() > 0;
 
@@ -126,13 +124,13 @@ public class ClientsDAO {
     }
 
     // DELETE
-    public static boolean deleteClient(String companyId) {
-        String sql = "DELETE FROM Client WHERE companyId = ?";
+    public static boolean deleteClient(String clientId) {
+        String sql = "DELETE FROM Client WHERE clientID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, companyId);
+            stmt.setString(1, clientId);
             return stmt.executeUpdate() > 0;
 
         } catch (SQLException e) {

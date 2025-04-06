@@ -1,19 +1,19 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DiscountDAO {
+public class GroupSaleDAO {
 
     // CREATE
-    public static boolean insertDiscount(Discount d) {
-        String sql = "INSERT INTO Discount (discountType, discountValue, groupSaleID, folID) VALUES (?, ?, ?, ?)";
+    public static boolean insertGroupSale(GroupSale gs) {
+        String sql = "INSERT INTO GroupSale (saleDate, totalCost, groupID, showID) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, d.getDiscountType());
-            stmt.setDouble(2, d.getDiscountValue());
-            stmt.setInt(3, d.getGroupSaleId());
-            stmt.setInt(4, d.getFolId());
+            stmt.setDate(1, gs.getSaleDate());
+            stmt.setDouble(2, gs.getTotalCost());
+            stmt.setInt(3, gs.getGroupId());
+            stmt.setInt(4, gs.getShowId());
 
             return stmt.executeUpdate() > 0;
 
@@ -25,35 +25,35 @@ public class DiscountDAO {
     }
 
     // READ ALL
-    public static ArrayList<Discount> getAllDiscounts() {
-        ArrayList<Discount> discounts = new ArrayList<>();
-        String sql = "SELECT * FROM Discount";
+    public static ArrayList<GroupSale> getAllGroupSales() {
+        ArrayList<GroupSale> sales = new ArrayList<>();
+        String sql = "SELECT * FROM GroupSale";
 
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Discount d = new Discount(
-                        rs.getInt("discountId"),
-                        rs.getString("discountType"),
-                        rs.getDouble("discountValue"),
+                GroupSale gs = new GroupSale(
                         rs.getInt("groupSaleID"),
-                        rs.getInt("folID")
+                        rs.getDate("saleDate"),
+                        rs.getDouble("totalCost"),
+                        rs.getInt("groupID"),
+                        rs.getInt("showID")
                 );
-                discounts.add(d);
+                sales.add(gs);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return discounts;
+        return sales;
     }
 
     // READ ONE
-    public static Discount getDiscountById(int id) {
-        String sql = "SELECT * FROM Discount WHERE discountId = ?";
+    public static GroupSale getGroupSaleById(int id) {
+        String sql = "SELECT * FROM GroupSale WHERE groupSaleID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -62,12 +62,12 @@ public class DiscountDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new Discount(
-                        rs.getInt("discountId"),
-                        rs.getString("discountType"),
-                        rs.getDouble("discountValue"),
+                return new GroupSale(
                         rs.getInt("groupSaleID"),
-                        rs.getInt("folID")
+                        rs.getDate("saleDate"),
+                        rs.getDouble("totalCost"),
+                        rs.getInt("groupID"),
+                        rs.getInt("showID")
                 );
             }
 
@@ -79,17 +79,17 @@ public class DiscountDAO {
     }
 
     // UPDATE
-    public static boolean updateDiscount(Discount d) {
-        String sql = "UPDATE Discount SET discountType = ?, discountValue = ?, groupSaleID = ?, folID = ? WHERE discountId = ?";
+    public static boolean updateGroupSale(GroupSale gs) {
+        String sql = "UPDATE GroupSale SET saleDate = ?, totalCost = ?, groupID = ?, showID = ? WHERE groupSaleID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, d.getDiscountType());
-            stmt.setDouble(2, d.getDiscountValue());
-            stmt.setInt(3, d.getGroupSaleId());
-            stmt.setInt(4, d.getFolId());
-            stmt.setInt(5, d.getDiscountId());
+            stmt.setDate(1, gs.getSaleDate());
+            stmt.setDouble(2, gs.getTotalCost());
+            stmt.setInt(3, gs.getGroupId());
+            stmt.setInt(4, gs.getShowId());
+            stmt.setInt(5, gs.getGroupSaleId());
 
             return stmt.executeUpdate() > 0;
 
@@ -101,8 +101,8 @@ public class DiscountDAO {
     }
 
     // DELETE
-    public static boolean deleteDiscount(int id) {
-        String sql = "DELETE FROM Discount WHERE discountId = ?";
+    public static boolean deleteGroupSale(int id) {
+        String sql = "DELETE FROM GroupSale WHERE groupSaleID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

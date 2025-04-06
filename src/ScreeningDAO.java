@@ -5,19 +5,19 @@ public class ScreeningDAO {
 
     // CREATE
     public static boolean insertScreening(Screening s) {
-        String sql = "INSERT INTO Screening (screeningDate, startTime, filmId, price, venueId) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Screening (date, screenNumber, venue, order_id, start_time, price) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDate(1, s.getScreeningDate());
-            stmt.setTime(2, s.getStartTime());
-            stmt.setInt(3, s.getFilmId());
-            stmt.setDouble(4, s.getPrice());
-            stmt.setInt(5, s.getVenueId());
+            stmt.setDate(1, s.getDate());
+            stmt.setInt(2, s.getScreenNumber());
+            stmt.setString(3, s.getVenue());
+            stmt.setInt(4, s.getOrderId());
+            stmt.setTime(5, s.getStartTime());
+            stmt.setBigDecimal(6, s.getPrice());
 
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -36,12 +36,13 @@ public class ScreeningDAO {
 
             while (rs.next()) {
                 Screening s = new Screening(
-                        rs.getInt("screeningId"),
-                        rs.getDate("screeningDate"),
-                        rs.getTime("startTime"),
-                        rs.getInt("filmId"),
-                        rs.getDouble("price"),
-                        rs.getInt("venueId")
+                        rs.getInt("screeningID"),
+                        rs.getDate("date"),
+                        rs.getInt("screenNumber"),
+                        rs.getString("venue"),
+                        rs.getInt("order_id"),
+                        rs.getTime("start_time"),
+                        rs.getBigDecimal("price")
                 );
                 screenings.add(s);
             }
@@ -55,7 +56,7 @@ public class ScreeningDAO {
 
     // READ ONE
     public static Screening getScreeningById(int id) {
-        String sql = "SELECT * FROM Screening WHERE screeningId = ?";
+        String sql = "SELECT * FROM Screening WHERE screeningID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -65,12 +66,13 @@ public class ScreeningDAO {
 
             if (rs.next()) {
                 return new Screening(
-                        rs.getInt("screeningId"),
-                        rs.getDate("screeningDate"),
-                        rs.getTime("startTime"),
-                        rs.getInt("filmId"),
-                        rs.getDouble("price"),
-                        rs.getInt("venueId")
+                        rs.getInt("screeningID"),
+                        rs.getDate("date"),
+                        rs.getInt("screenNumber"),
+                        rs.getString("venue"),
+                        rs.getInt("order_id"),
+                        rs.getTime("start_time"),
+                        rs.getBigDecimal("price")
                 );
             }
 
@@ -83,20 +85,20 @@ public class ScreeningDAO {
 
     // UPDATE
     public static boolean updateScreening(Screening s) {
-        String sql = "UPDATE Screening SET screeningDate = ?, startTime = ?, filmId = ?, price = ?, venueId = ? WHERE screeningId = ?";
+        String sql = "UPDATE Screening SET date = ?, screenNumber = ?, venue = ?, order_id = ?, start_time = ?, price = ? WHERE screeningID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setDate(1, s.getScreeningDate());
-            stmt.setTime(2, s.getStartTime());
-            stmt.setInt(3, s.getFilmId());
-            stmt.setDouble(4, s.getPrice());
-            stmt.setInt(5, s.getVenueId());
-            stmt.setInt(6, s.getScreeningId());
+            stmt.setDate(1, s.getDate());
+            stmt.setInt(2, s.getScreenNumber());
+            stmt.setString(3, s.getVenue());
+            stmt.setInt(4, s.getOrderId());
+            stmt.setTime(5, s.getStartTime());
+            stmt.setBigDecimal(6, s.getPrice());
+            stmt.setInt(7, s.getScreeningId());
 
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,14 +108,13 @@ public class ScreeningDAO {
 
     // DELETE
     public static boolean deleteScreening(int id) {
-        String sql = "DELETE FROM Screening WHERE screeningId = ?";
+        String sql = "DELETE FROM Screening WHERE screeningID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
