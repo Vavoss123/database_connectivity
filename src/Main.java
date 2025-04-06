@@ -5,176 +5,177 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        Timestamp start = Timestamp.valueOf("2025-04-06 12:00:00");
-        Timestamp end = Timestamp.valueOf("2025-04-06 14:00:00");
         Date date = Date.valueOf("2025-04-06");
 
-        // 1. Create Venue
-        //Venue venue = new Venue(0, "Main Hall", 200, "Concert", "Modern hall with premium acoustics.");
-        //VenueDAO.insertVenue(venue);
-
-        // --- R: Read all venues
-        List<Venue> venues = VenueDAO.getAllVenues();
-        venues.forEach(System.out::println);
-
-        // --- U: Update venue
-        Venue updatedVenue = new Venue(0, "Main Hall",  374, "Concert", "Modern hall with premium acoustics.");
-        VenueDAO.updateVenue(updatedVenue);
-
-        // --- D: Delete venue
-        // VenueDAO.deleteVenue(1);
-
-        // 2. Create Performance
-        //Performance performance = new Performance(0, "Spring Gala", "An evening of music and dance.", "Concert", start, end, 1);
-        //PerformanceDAO.insertPerformance(performance);
-
-        // --- R
-        //Performance p = PerformanceDAO.getPerformanceById(1);
-        //System.out.println(p);
-
-        // --- U
-        //Performance updatedPerformance = new Performance(0, "Summer Gala", "Updated event desc", "Opera", start, end, 1);
-        //PerformanceDAO.updatePerformance(updatedPerformance);
-
-        // --- D
-        // PerformanceDAO.deletePerformance(1);
-
-        // 3. Create Client
+        // --- 1. Client
         //Clients client = new Clients("C001", "Nova Events", "Clara Oswald", "clara@nova.com", "07700900000",
-        // "123 High Street", "London", "NW1 2AB", "Nova Billing", "billing@nova.com");
+        //        "123 High Street", "London", "NW1 2AB", "Nova Billing", "billing@nova.com");
         //ClientsDAO.insertClient(client);
 
-        // --- R
         //Clients retrievedClient = ClientsDAO.getClientById("C001");
         //System.out.println(retrievedClient);
 
-        // --- U
         //retrievedClient.setContactName("Clara O.");
         //ClientsDAO.updateClient(retrievedClient);
 
-        // --- D
-        // ClientsDAO.deleteClient("C001");
+        //ClientsDAO.deleteClient("C001");
 
-        // 4. Create Booking
-        //Booking booking = new Booking(0, "C001", 1, now, date, date, 150.0, 2);
-        //BookingDAO.insertBooking(booking);
-
-        // --- R
-        //Booking retrievedBooking = BookingDAO.getBookingById(1);
-        //System.out.println(retrievedBooking);
-
-        // --- U
-        //booking.setTotalCost(180.0);
-        //BookingDAO.updateBooking(booking);
-
-        // --- D
-        // BookingDAO.deleteBooking(1);
-
-        // 5. Create Seat
-        //Seat seat = new Seat(0, 1, "A", 10, true);
-        //SeatDAO.insertSeat(seat);
-
-        // --- R
-        Seat retrievedSeat = SeatDAO.getSeatById(1);
-        System.out.println(retrievedSeat);
-
-        // --- U
-        //seat.setRowLabel("B");
-        //SeatDAO.updateSeat(seat);
-
-        // --- D
-        // SeatDAO.deleteSeat(1);
-
-        // 6. Create Discount
-        //Discount discount = new Discount(0, "Early Bird", 10.0, Date.valueOf("2025-04-01"), Date.valueOf("2025-04-07"));
+        // --- 2. Discount
+        //Discount discount = new Discount(0, "Student", 15.0, Date.valueOf("2025-04-01"), Date.valueOf("2025-04-30"));
         //DiscountDAO.insertDiscount(discount);
 
-        // --- R
         //Discount retrievedDiscount = DiscountDAO.getDiscountById(1);
         //System.out.println(retrievedDiscount);
 
-        // --- U
-        //discount.setDiscountRate(15.0);
-        //DiscountDAO.updateDiscount(discount);
+        //retrievedDiscount.setDiscountRate(20.0);
+        //DiscountDAO.updateDiscount(retrievedDiscount);
 
-        // --- D
-        // DiscountDAO.deleteDiscount(1);
+        //DiscountDAO.deleteDiscount(1);
 
-        // 7. Create Ticket
-        //Ticket ticket = new Ticket(0, 1, 1, 75.00, 1, now);
-        //TicketDAO.insertTicket(ticket);
-
-        // --- R
-        //Ticket retrievedTicket = TicketDAO.getTicketById(1);
-        //System.out.println(retrievedTicket);
-
-        // --- U
-        //ticket.setPrice(85.00);
-        //TicketDAO.updateTicket(ticket);
-
-        // --- D
-        // TicketDAO.deleteTicket(1);
-
-        // 8. Create Review
-        //Review review = new Review(0, 1, "C001", 5, "Outstanding show!", now);
-        //ReviewDAO.insertReview(review);
-
-        // --- R
-        //Review retrievedReview = ReviewDAO.getReviewById(1);
-        //System.out.println(retrievedReview);
-
-        // --- U
-        //review.setComment("Excellent and immersive!");
-        //ReviewDAO.updateReview(review);
-
-        // --- D
-        // ReviewDAO.deleteReview(1);
-
-        // 9. Create Revenue
-        //Revenue revenue = new Revenue(0, 1, 150.0, now);
-        //RevenueDAO.insertRevenue(revenue);
-
-        // --- R
-        //Revenue retrievedRevenue = RevenueDAO.getRevenueById(1);
-        //System.out.println(retrievedRevenue);
-
-        // --- U
-        //revenue.setTotalAmount(175.0);
-        //RevenueDAO.updateRevenue(revenue);
-
-        // --- D
-        // RevenueDAO.deleteRevenue(1);
-
-        // 10. Create Film (new structure: filmId, runtime, distributor, cost, releaseYear, certificate, availableStart, availableEnd)
-        //Film film = new Film(0, 120, "Paramount", 1000.0, 2025, "PG", now, now);
+        // --- 3. Film
+        //Film film = new Film(0, 120, "Universal", 500.0, 2024, "12A", now, now);
         //FilmDAO.insertFilm(film);
 
-        // --- R
         //Film retrievedFilm = FilmDAO.getFilmById(1);
         //System.out.println(retrievedFilm);
 
-        // --- U
         //retrievedFilm.setRuntime(130);
         //FilmDAO.updateFilm(retrievedFilm);
 
-        // --- D
         //FilmDAO.deleteFilm(1);
 
-        // 11. Create Screening
-        //Screening screening = new Screening(0, date, time, 1, 9.99, 1);
+        // --- 4. FoL
+        //FoL fol = new FoL(0, date, "Premium", "Victor", "123 Lane", "vic@xmail.com");
+        //FoLDAO.insertFoL(fol);
+
+        //FoL retrievedFoL = FoLDAO.getFoLById(1);
+        //System.out.println(retrievedFoL);
+
+        //retrievedFoL.setMembershipType("VIP");
+        //FoLDAO.updateFoL(retrievedFoL);
+
+        //FoLDAO.deleteFoL(1);
+
+        // --- 5. Group
+        //Group group = new Group(0, 20, "Alpha Group", "Nina");
+        //GroupDAO.insertGroup(group);
+
+        //Group retrievedGroup = GroupDAO.getGroupById(1);
+        //System.out.println(retrievedGroup);
+
+        //retrievedGroup.setGroupSize(25);
+        //GroupDAO.updateGroup(retrievedGroup);
+
+        //GroupDAO.deleteGroup(1);
+
+        // --- 6. GroupSale
+        //GroupSale gs = new GroupSale(0, date, 500.0, 1, 1);
+        //GroupSaleDAO.insertGroupSale(gs);
+
+        //GroupSale retrievedGS = GroupSaleDAO.getGroupSaleById(1);
+        //System.out.println(retrievedGS);
+
+        //retrievedGS.setTotalCost(550.0);
+        //GroupSaleDAO.updateGroupSale(retrievedGS);
+
+        //GroupSaleDAO.deleteGroupSale(1);
+
+        // --- 7. HeldSeats
+        //HeldSeat seat = new HeldSeat(0, 1, "Held", 1, 1, 1);
+        //HeldSeatsDAO.insertHeldSeat(seat);
+
+        //HeldSeat retrievedHeld = HeldSeatsDAO.getHeldSeatById(1);
+        //System.out.println(retrievedHeld);
+
+        //retrievedHeld.setStatus("Confirmed");
+        //HeldSeatsDAO.updateHeldSeat(retrievedHeld);
+
+        //HeldSeatsDAO.deleteHeldSeat(1);
+
+        // --- 8. Invoice
+        //Invoice invoice = new Invoice(0, date, Date.valueOf("2025-04-10"), "C001", 1);
+        //InvoiceDAO.insertInvoice(invoice);
+
+        //Invoice retrievedInvoice = InvoiceDAO.getInvoiceById(1);
+        //System.out.println(retrievedInvoice);
+
+        //retrievedInvoice.setDueDate(Date.valueOf("2025-04-12"));
+        //InvoiceDAO.updateInvoice(retrievedInvoice);
+
+        //InvoiceDAO.deleteInvoice(1);
+
+        // --- 9. Meeting
+        //Meeting meeting = new Meeting(0, now, "Anfy", "Planning tour logistics", 1, "C001");
+        //MeetingDAO.insertMeeting(meeting);
+
+        //Meeting retrievedMeeting = MeetingDAO.getMeetingById(1);
+        //System.out.println(retrievedMeeting);
+
+        //retrievedMeeting.setPurpose("Discuss event schedule");
+        //MeetingDAO.updateMeeting(retrievedMeeting);
+
+        //MeetingDAO.deleteMeeting(1);
+
+        // --- 10. Screening
+        //Screening screening = new Screening(0, date, 1, "Main Hall", 1, Time.valueOf("14:00:00"), 12.50);
         //ScreeningDAO.insertScreening(screening);
 
-        // --- R
         //Screening retrievedScreening = ScreeningDAO.getScreeningById(1);
         //System.out.println(retrievedScreening);
 
-        // --- U
-        //retrievedScreening.setPrice(12.99);
+        //retrievedScreening.setPrice(15.0);
         //ScreeningDAO.updateScreening(retrievedScreening);
 
-        // --- D
         //ScreeningDAO.deleteScreening(1);
 
-        System.out.println("\n✅ CRUD test completed!");
+        // --- 11. Show
+        //Show show = new Show(0, 120, "Spring Bloom", "A musical celebration", "Musical");
+        //ShowDAO.insertShow(show);
+
+        //Show retrievedShow = ShowDAO.getShowById(1);
+        //System.out.println(retrievedShow);
+
+        //retrievedShow.setDuration(140);
+        //ShowDAO.updateShow(retrievedShow);
+
+        //ShowDAO.deleteShow(1);
+
+        // --- 12. Ticket
+        //Ticket ticket = new Ticket(0, 12.99, 1);
+        //TicketDAO.insertTicket(ticket);
+
+        //Ticket retrievedTicket = TicketDAO.getTicketById(1);
+        //System.out.println(retrievedTicket);
+
+        //retrievedTicket.setPrice(14.99);
+        //TicketDAO.updateTicket(retrievedTicket);
+
+        //TicketDAO.deleteTicket(1);
+
+        // --- 13. TicketSales
+        //TicketSales sale = new TicketSales(0, 3, date, 1, 1);
+        //TicketSalesDAO.insertTicketSales(sale);
+
+        //TicketSales retrievedSale = TicketSalesDAO.getTicketSalesById(1);
+        //System.out.println(retrievedSale);
+
+        //retrievedSale.setQuantity(4);
+        //TicketSalesDAO.updateTicketSales(retrievedSale);
+
+        //TicketSalesDAO.deleteTicketSales(1);
+
+        // --- 14. Tours
+        //Tours tour = new Tours(0, "UK Tour", "Visiting major cities", date, "London, Birmingham", 1);
+        //ToursDAO.insertTour(tour);
+
+        //Tours retrievedTour = ToursDAO.getTourById(1);
+        //System.out.println(retrievedTour);
+
+        //retrievedTour.setTitle("UK & Ireland Tour");
+        //ToursDAO.updateTour(retrievedTour);
+
+        //ToursDAO.deleteTour(1);
+
+        System.out.println("\n✅ CRUD test completed for in2 database!");
     }
 }
