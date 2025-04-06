@@ -1,9 +1,17 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Data Access Object (DAO) class for performing CRUD operations on the Film table.
+ */
 public class FilmDAO {
 
-    // CREATE
+    /**
+     * Inserts a new film into the database.
+     *
+     * @param f the Film object to insert
+     * @return true if insertion is successful, false otherwise
+     */
     public static boolean insertFilm(Film f) {
         String sql = "INSERT INTO Film (duration, title, genre, director, distributor, releaseYear, certificate, availableStart, availableEnd) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -30,7 +38,11 @@ public class FilmDAO {
         return false;
     }
 
-    // READ ALL
+    /**
+     * Retrieves all films from the database.
+     *
+     * @return an ArrayList of Film objects
+     */
     public static ArrayList<Film> getAllFilms() {
         ArrayList<Film> films = new ArrayList<>();
         String sql = "SELECT * FROM Film";
@@ -62,7 +74,12 @@ public class FilmDAO {
         return films;
     }
 
-    // READ ONE
+    /**
+     * Retrieves a single film by its ID.
+     *
+     * @param filmId the ID of the film to retrieve
+     * @return the Film object, or null if not found
+     */
     public static Film getFilmById(int filmId) {
         String sql = "SELECT * FROM Film WHERE filmId = ?";
 
@@ -94,7 +111,12 @@ public class FilmDAO {
         return null;
     }
 
-    // UPDATE
+    /**
+     * Updates an existing film in the database.
+     *
+     * @param f the Film object containing updated information
+     * @return true if update is successful, false otherwise
+     */
     public static boolean updateFilm(Film f) {
         String sql = "UPDATE Film SET duration = ?, title = ?, genre = ?, director = ?, distributor = ?, releaseYear = ?, certificate = ?, availableStart = ?, availableEnd = ? " +
                 "WHERE filmId = ?";
@@ -122,7 +144,12 @@ public class FilmDAO {
         return false;
     }
 
-    // DELETE
+    /**
+     * Deletes a film from the database by its ID.
+     *
+     * @param filmId the ID of the film to delete
+     * @return true if deletion is successful, false otherwise
+     */
     public static boolean deleteFilm(int filmId) {
         String sql = "DELETE FROM Film WHERE filmId = ?";
 

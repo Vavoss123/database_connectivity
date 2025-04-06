@@ -1,9 +1,18 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Data Access Object (DAO) for the Discount entity.
+ * Provides methods to perform CRUD operations on the Discount table.
+ */
 public class DiscountDAO {
 
-    // CREATE
+    /**
+     * Inserts a new discount into the database.
+     *
+     * @param d the Discount object to insert
+     * @return true if insertion is successful, false otherwise
+     */
     public static boolean insertDiscount(Discount d) {
         String sql = "INSERT INTO Discount (discountType, discountValue, groupSaleID, folID) VALUES (?, ?, ?, ?)";
 
@@ -24,7 +33,11 @@ public class DiscountDAO {
         return false;
     }
 
-    // READ ALL
+    /**
+     * Retrieves all discounts from the database.
+     *
+     * @return an ArrayList of Discount objects
+     */
     public static ArrayList<Discount> getAllDiscounts() {
         ArrayList<Discount> discounts = new ArrayList<>();
         String sql = "SELECT * FROM Discount";
@@ -51,7 +64,12 @@ public class DiscountDAO {
         return discounts;
     }
 
-    // READ ONE
+    /**
+     * Retrieves a single discount by its ID.
+     *
+     * @param id the ID of the discount to retrieve
+     * @return the Discount object if found, otherwise null
+     */
     public static Discount getDiscountById(int id) {
         String sql = "SELECT * FROM Discount WHERE discountId = ?";
 
@@ -78,7 +96,12 @@ public class DiscountDAO {
         return null;
     }
 
-    // UPDATE
+    /**
+     * Updates an existing discount in the database.
+     *
+     * @param d the Discount object with updated values
+     * @return true if the update is successful, false otherwise
+     */
     public static boolean updateDiscount(Discount d) {
         String sql = "UPDATE Discount SET discountType = ?, discountValue = ?, groupSaleID = ?, folID = ? WHERE discountId = ?";
 
@@ -100,7 +123,12 @@ public class DiscountDAO {
         return false;
     }
 
-    // DELETE
+    /**
+     * Deletes a discount from the database by ID.
+     *
+     * @param id the ID of the discount to delete
+     * @return true if the deletion is successful, false otherwise
+     */
     public static boolean deleteDiscount(int id) {
         String sql = "DELETE FROM Discount WHERE discountId = ?";
 

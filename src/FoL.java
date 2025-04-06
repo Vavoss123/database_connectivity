@@ -1,5 +1,8 @@
 import java.sql.Date;
 
+/**
+ * Represents a Friend of the Library (FoL) member with their membership details.
+ */
 public class FoL {
     private int folId;
     private Date joinDate;
@@ -8,9 +11,21 @@ public class FoL {
     private String address;
     private String email;
 
-    // Constructors
+    /**
+     * Default constructor for FoL.
+     */
     public FoL() {}
 
+    /**
+     * Constructs a new FoL object with all details.
+     *
+     * @param folId           The unique ID of the FoL member.
+     * @param joinDate        The date the member joined.
+     * @param membershipType  The type of membership held.
+     * @param name            The full name of the member.
+     * @param address         The address of the member.
+     * @param email           The email address of the member.
+     */
     public FoL(int folId, Date joinDate, String membershipType, String name, String address, String email) {
         this.folId = folId;
         this.joinDate = joinDate;
@@ -20,22 +35,111 @@ public class FoL {
         this.email = email;
     }
 
-    // Getters and Setters
-    public int getFolId() { return folId; }
-    public void setFolId(int folId) { this.folId = folId; }
+    /**
+     * Gets the unique ID of the FoL member.
+     *
+     * @return The FoL ID.
+     */
+    public int getFolId() {
+        return folId;
+    }
 
-    public Date getJoinDate() { return joinDate; }
-    public void setJoinDate(Date joinDate) { this.joinDate = joinDate; }
+    /**
+     * Sets the unique ID of the FoL member.
+     *
+     * @param folId The FoL ID to set.
+     */
+    public void setFolId(int folId) {
+        this.folId = folId;
+    }
 
-    public String getMembershipType() { return membershipType; }
-    public void setMembershipType(String membershipType) { this.membershipType = membershipType; }
+    /**
+     * Gets the date the member joined.
+     *
+     * @return The join date.
+     */
+    public Date getJoinDate() {
+        return joinDate;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    /**
+     * Sets the date the member joined.
+     *
+     * @param joinDate The join date to set.
+     */
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+    /**
+     * Gets the type of membership held by the member.
+     *
+     * @return The membership type.
+     */
+    public String getMembershipType() {
+        return membershipType;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    /**
+     * Sets the type of membership.
+     *
+     * @param membershipType The membership type to set.
+     */
+    public void setMembershipType(String membershipType) {
+        this.membershipType = membershipType;
+    }
+
+    /**
+     * Gets the name of the FoL member.
+     *
+     * @return The name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the FoL member.
+     *
+     * @param name The name to set.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets the address of the FoL member.
+     *
+     * @return The address.
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * Sets the address of the FoL member.
+     *
+     * @param address The address to set.
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * Gets the email of the FoL member.
+     *
+     * @return The email address.
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * Sets the email of the FoL member.
+     *
+     * @param email The email address to set.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

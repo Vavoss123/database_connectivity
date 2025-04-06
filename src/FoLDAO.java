@@ -1,9 +1,17 @@
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Data Access Object (DAO) class for managing FoL (Friends of the Library) records in the database.
+ */
 public class FoLDAO {
 
-    // CREATE
+    /**
+     * Inserts a new FoL record into the database.
+     *
+     * @param f The {@link FoL} object to insert.
+     * @return true if the insert was successful, false otherwise.
+     */
     public static boolean insertFoL(FoL f) {
         String sql = "INSERT INTO FoL (joinDate, membershipType, name, address, email) VALUES (?, ?, ?, ?, ?)";
 
@@ -25,7 +33,11 @@ public class FoLDAO {
         return false;
     }
 
-    // READ ALL
+    /**
+     * Retrieves all FoL records from the database.
+     *
+     * @return An {@link ArrayList} of {@link FoL} objects.
+     */
     public static ArrayList<FoL> getAllFoLs() {
         ArrayList<FoL> list = new ArrayList<>();
         String sql = "SELECT * FROM FoL";
@@ -53,7 +65,12 @@ public class FoLDAO {
         return list;
     }
 
-    // READ ONE
+    /**
+     * Retrieves a single FoL record by its ID.
+     *
+     * @param id The ID of the FoL to retrieve.
+     * @return A {@link FoL} object if found, otherwise null.
+     */
     public static FoL getFoLById(int id) {
         String sql = "SELECT * FROM FoL WHERE folID = ?";
 
@@ -81,7 +98,12 @@ public class FoLDAO {
         return null;
     }
 
-    // UPDATE
+    /**
+     * Updates an existing FoL record in the database.
+     *
+     * @param f The {@link FoL} object containing updated data.
+     * @return true if the update was successful, false otherwise.
+     */
     public static boolean updateFoL(FoL f) {
         String sql = "UPDATE FoL SET joinDate = ?, membershipType = ?, name = ?, address = ?, email = ? WHERE folID = ?";
 
@@ -104,7 +126,12 @@ public class FoLDAO {
         return false;
     }
 
-    // DELETE
+    /**
+     * Deletes a FoL record from the database by ID.
+     *
+     * @param id The ID of the FoL to delete.
+     * @return true if the delete was successful, false otherwise.
+     */
     public static boolean deleteFoL(int id) {
         String sql = "DELETE FROM FoL WHERE folID = ?";
 
