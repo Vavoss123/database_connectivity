@@ -145,8 +145,8 @@ public class Main {
         // --- D
         // RevenueDAO.deleteRevenue(1);
 
-        // 10. Create Film
-        //Film film = new Film(0, 1, 120, "Paramount", 1000.0);
+        // 10. Create Film (new structure: filmId, runtime, distributor, cost, releaseYear, certificate, availableStart, availableEnd)
+        //Film film = new Film(0, 120, "Paramount", 1000.0, 2025, "PG", now, now);
         //FilmDAO.insertFilm(film);
 
         // --- R
@@ -154,11 +154,26 @@ public class Main {
         //System.out.println(retrievedFilm);
 
         // --- U
-        //film.setRuntime(130);
-        //FilmDAO.updateFilm(film);
+        //retrievedFilm.setRuntime(130);
+        //FilmDAO.updateFilm(retrievedFilm);
 
         // --- D
-        // FilmDAO.deleteFilm(1);
+        //FilmDAO.deleteFilm(1);
+
+        // 11. Create Screening
+        //Screening screening = new Screening(0, date, time, 1, 9.99, 1);
+        //ScreeningDAO.insertScreening(screening);
+
+        // --- R
+        //Screening retrievedScreening = ScreeningDAO.getScreeningById(1);
+        //System.out.println(retrievedScreening);
+
+        // --- U
+        //retrievedScreening.setPrice(12.99);
+        //ScreeningDAO.updateScreening(retrievedScreening);
+
+        // --- D
+        //ScreeningDAO.deleteScreening(1);
 
         System.out.println("\n✅ CRUD test completed!");
     }
