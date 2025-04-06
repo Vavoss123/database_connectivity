@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Utility class for managing the database connection to the MySQL server.
@@ -20,28 +22,27 @@ public class DBConnection {
      * Retrieves a connection to the database. If a connection does not already exist or is closed,
      * a new one is established.
      *
-     * @return a valid database connection
+     * @return the active database connection
      * @throws SQLException if a database access error occurs
      */
     public static Connection getConnection() throws SQLException {
         try {
-            // Load the MySQL JDBC driver
+            // Load the JDBC driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace(); // Log error if driver is not found
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, "JDBC Driver not found", e);
         }
 
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
-
         return connection;
     }
 
     /**
-     * Closes the current database connection if it is open.
+     * Closes the active database connection if it exists and is open.
      *
-     * @throws SQLException if a database access error occurs
+     * @throws SQLException if a database access error occurs during closing
      */
     public static void closeConnection() throws SQLException {
         if (connection != null && !connection.isClosed()) {
