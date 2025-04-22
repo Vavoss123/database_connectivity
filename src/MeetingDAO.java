@@ -115,7 +115,7 @@ public class MeetingDAO {
         return false;
     }
 
-    // DELETE
+    // DELETE 
     public static boolean deleteMeeting(int meetingId) {
         String sql = "DELETE FROM Meeting WHERE meetingID = ?";
 
