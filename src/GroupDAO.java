@@ -5,7 +5,7 @@ public class GroupDAO {
 
     // CREATE
     public static boolean insertGroup(Group g) {
-        String sql = "INSERT INTO `Group` (groupSize, name, contactPerson) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO `Group` (groupSize, name, contactPerson, room) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -13,6 +13,7 @@ public class GroupDAO {
             stmt.setInt(1, g.getGroupSize());
             stmt.setString(2, g.getName());
             stmt.setString(3, g.getContactPerson());
+            stmt.setString(4, g.getRoom());
 
             return stmt.executeUpdate() > 0;
 
@@ -37,7 +38,8 @@ public class GroupDAO {
                         rs.getInt("groupID"),
                         rs.getInt("groupSize"),
                         rs.getString("name"),
-                        rs.getString("contactPerson")
+                        rs.getString("contactPerson"),
+                        rs.getString("room")
                 );
                 groups.add(g);
             }
@@ -64,7 +66,8 @@ public class GroupDAO {
                         rs.getInt("groupID"),
                         rs.getInt("groupSize"),
                         rs.getString("name"),
-                        rs.getString("contactPerson")
+                        rs.getString("contactPerson"),
+                        rs.getString("room")
                 );
             }
 
@@ -77,7 +80,7 @@ public class GroupDAO {
 
     // UPDATE
     public static boolean updateGroup(Group g) {
-        String sql = "UPDATE `Group` SET groupSize = ?, name = ?, contactPerson = ? WHERE groupID = ?";
+        String sql = "UPDATE `Group` SET groupSize = ?, name = ?, contactPerson = ?, room = ? WHERE groupID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -85,7 +88,8 @@ public class GroupDAO {
             stmt.setInt(1, g.getGroupSize());
             stmt.setString(2, g.getName());
             stmt.setString(3, g.getContactPerson());
-            stmt.setInt(4, g.getGroupId());
+            stmt.setString(4, g.getRoom());
+            stmt.setInt(5, g.getGroupId());
 
             return stmt.executeUpdate() > 0;
 

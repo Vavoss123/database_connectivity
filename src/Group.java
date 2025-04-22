@@ -3,15 +3,17 @@ public class Group {
     private int groupSize;
     private String name;
     private String contactPerson;
+    private String room;
 
     // Constructors
     public Group() {}
 
-    public Group(int groupId, int groupSize, String name, String contactPerson) {
+    public Group(int groupId, int groupSize, String name, String contactPerson, String room) {
         this.groupId = groupId;
         this.groupSize = groupSize;
         this.name = name;
         this.contactPerson = contactPerson;
+        this.room = room;
     }
 
     // Getters and Setters
@@ -26,4 +28,7 @@ public class Group {
 
     public String getContactPerson() { return contactPerson; }
     public void setContactPerson(String contactPerson) { this.contactPerson = contactPerson; }
+
+    public String getRoom() { return room; }
+    public void setRoom(String room) { this.room = room; }
 }

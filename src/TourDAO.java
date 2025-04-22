@@ -5,7 +5,7 @@ public class TourDAO {
 
     // CREATE
     public static boolean insertTour(Tour t) {
-        String sql = "INSERT INTO Tours (title, description, date, venues, showID) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Tours (title, description, date, startTime, venues, showID) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -13,11 +13,11 @@ public class TourDAO {
             stmt.setString(1, t.getTitle());
             stmt.setString(2, t.getDescription());
             stmt.setDate(3, t.getDate());
-            stmt.setString(4, t.getVenues());
-            stmt.setInt(5, t.getShowId());
+            stmt.setTime(4, t.getStartTime());
+            stmt.setString(5, t.getVenues());
+            stmt.setInt(6, t.getShowId());
 
             return stmt.executeUpdate() > 0;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,6 +40,7 @@ public class TourDAO {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getDate("date"),
+                        rs.getTime("startTime"),
                         rs.getString("venues"),
                         rs.getInt("showID")
                 );
@@ -69,6 +70,7 @@ public class TourDAO {
                         rs.getString("title"),
                         rs.getString("description"),
                         rs.getDate("date"),
+                        rs.getTime("startTime"),
                         rs.getString("venues"),
                         rs.getInt("showID")
                 );
@@ -83,7 +85,7 @@ public class TourDAO {
 
     // UPDATE
     public static boolean updateTour(Tour t) {
-        String sql = "UPDATE Tours SET title = ?, description = ?, date = ?, venues = ?, showID = ? WHERE tourID = ?";
+        String sql = "UPDATE Tours SET title = ?, description = ?, date = ?, startTime = ?, venues = ?, showID = ? WHERE tourID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -91,9 +93,10 @@ public class TourDAO {
             stmt.setString(1, t.getTitle());
             stmt.setString(2, t.getDescription());
             stmt.setDate(3, t.getDate());
-            stmt.setString(4, t.getVenues());
-            stmt.setInt(5, t.getShowId());
-            stmt.setInt(6, t.getTourId());
+            stmt.setTime(4, t.getStartTime());
+            stmt.setString(5, t.getVenues());
+            stmt.setInt(6, t.getShowId());
+            stmt.setInt(7, t.getTourId());
 
             return stmt.executeUpdate() > 0;
 

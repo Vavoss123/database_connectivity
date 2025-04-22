@@ -5,7 +5,7 @@ public class MeetingDAO {
 
     // CREATE
     public static boolean insertMeeting(Meeting m) {
-        String sql = "INSERT INTO Meeting (schedule, organiser, purpose, showID, clientID) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Meeting (schedule, organiser, purpose, date, startTime, showID, clientID, room) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -13,8 +13,11 @@ public class MeetingDAO {
             stmt.setTimestamp(1, m.getSchedule());
             stmt.setString(2, m.getOrganiser());
             stmt.setString(3, m.getPurpose());
-            stmt.setInt(4, m.getShowId());
-            stmt.setString(5, m.getClientId());
+            stmt.setDate(4, m.getDate());
+            stmt.setTime(5, m.getStartTime());
+            stmt.setInt(6, m.getShowId());
+            stmt.setString(7, m.getClientId());
+            stmt.setString(8, m.getRoom());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -39,8 +42,11 @@ public class MeetingDAO {
                         rs.getTimestamp("schedule"),
                         rs.getString("organiser"),
                         rs.getString("purpose"),
+                        rs.getDate("date"),
+                        rs.getTime("startTime"),
                         rs.getInt("showID"),
-                        rs.getString("clientID")
+                        rs.getString("clientID"),
+                        rs.getString("room")
                 );
                 meetings.add(m);
             }
@@ -68,8 +74,11 @@ public class MeetingDAO {
                         rs.getTimestamp("schedule"),
                         rs.getString("organiser"),
                         rs.getString("purpose"),
+                        rs.getDate("date"),
+                        rs.getTime("startTime"),
                         rs.getInt("showID"),
-                        rs.getString("clientID")
+                        rs.getString("clientID"),
+                        rs.getString("room")
                 );
             }
 
@@ -82,7 +91,7 @@ public class MeetingDAO {
 
     // UPDATE
     public static boolean updateMeeting(Meeting m) {
-        String sql = "UPDATE Meeting SET schedule = ?, organiser = ?, purpose = ?, showID = ?, clientID = ? WHERE meetingID = ?";
+        String sql = "UPDATE Meeting SET schedule = ?, organiser = ?, purpose = ?, date = ?, startTime = ?, showID = ?, clientID = ?, room = ? WHERE meetingID = ?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -90,11 +99,15 @@ public class MeetingDAO {
             stmt.setTimestamp(1, m.getSchedule());
             stmt.setString(2, m.getOrganiser());
             stmt.setString(3, m.getPurpose());
-            stmt.setInt(4, m.getShowId());
-            stmt.setString(5, m.getClientId());
-            stmt.setInt(6, m.getMeetingId());
+            stmt.setDate(4, m.getDate());
+            stmt.setTime(5, m.getStartTime());
+            stmt.setInt(6, m.getShowId());
+            stmt.setString(7, m.getClientId());
+            stmt.setString(8, m.getRoom());
+            stmt.setInt(9, m.getMeetingId());
 
             return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -111,6 +124,7 @@ public class MeetingDAO {
 
             stmt.setInt(1, meetingId);
             return stmt.executeUpdate() > 0;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

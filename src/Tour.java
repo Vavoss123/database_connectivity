@@ -1,21 +1,24 @@
 import java.sql.Date;
+import java.sql.Time;
 
 public class Tour {
     private int tourId;
     private String title;
     private String description;
     private Date date;
+    private Time startTime;
     private String venues;
     private int showId;
 
     // Constructors
     public Tour() {}
 
-    public Tour(int tourId, String title, String description, Date date, String venues, int showId) {
+    public Tour(int tourId, String title, String description, Date date, Time startTime, String venues, int showId) {
         this.tourId = tourId;
         this.title = title;
         this.description = description;
         this.date = date;
+        this.startTime = startTime;
         this.venues = venues;
         this.showId = showId;
     }
@@ -32,6 +35,9 @@ public class Tour {
 
     public Date getDate() { return date; }
     public void setDate(Date date) { this.date = date; }
+
+    public Time getStartTime() { return startTime; }
+    public void setStartTime(Time startTime) { this.startTime = startTime; }
 
     public String getVenues() { return venues; }
     public void setVenues(String venues) { this.venues = venues; }
